@@ -36,7 +36,7 @@ src/
 
 ## Contact Information
 
-- **Email**: dev@travis-jankowski.com
+- **Email**: travis@jankowski.ai
 - **LinkedIn**: [travis-jankowski](https://linkedin.com/in/travis-jankowski)
 - **GitHub**: [travisj33304](https://github.com/travisj33304)
 
