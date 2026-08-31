@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Autonomous Tax Review Agent - Travis Jankowski</title>
+    <meta
+      name="description"
+      content="3rd Place at the Innovation Lab Competition: an AI agent for TruePrep AI that cross-checks tax documents against returns, detecting errors and missed savings with 90%+ accuracy."
+    />
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/project.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar" id="navbar">
+      <div class="container">
+        <a href="../index.html" class="navbar-brand">travis@portfolio:~$</a>
+        <button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="navbar-nav" id="navbar-nav">
+          <li><a href="../index.html#home">Home</a></li>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#experience">Experience</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container breadcrumb-bar">
+      <div class="breadcrumb"><a href="../index.html#projects">projects</a> / tax-review-agent/</div>
+    </div>
+
+    <section class="project-page-hero">
+      <div class="container">
+        <div class="project-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+        <h1>Autonomous Tax Review Agent</h1>
+        <p class="project-tagline">
+          An AI agent that cross-checks tax documents against prepared returns —
+          catching data-entry errors and missed savings before a CPA signs off.
+        </p>
+        <span class="award-banner"><i class="fas fa-trophy"></i> 3rd Place — Innovation Lab Competition · Sponsor: TruePrep AI</span>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 1rem">
+      <div class="container">
+        <div class="project-layout">
+          <aside class="project-sidebar">
+            <div class="card">
+              <h3>At a glance</h3>
+              <ul class="meta-list">
+                <li><span class="meta-label">Sponsor</span><span class="meta-value">TruePrep AI</span></li>
+                <li><span class="meta-label">Recognition</span><span class="meta-value">3rd Place, Innovation Lab Competition</span></li>
+                <li><span class="meta-label">Accuracy</span><span class="meta-value">90%+ error detection (mock data)</span></li>
+                <li><span class="meta-label">Data</span><span class="meta-value">Synthetic/mock tax documents</span></li>
+                <li><span class="meta-label">Code</span><span class="meta-value">Proprietary — demo on request</span></li>
+              </ul>
+            </div>
+          </aside>
+
+          <article class="project-body">
+            <h2>Problem</h2>
+            <p>
+              Tax preparation involves reconciling mountains of source documents
+              — W-2s, 1099s, K-1s, brokerage statements, receipts — against the
+              return itself. A missed carryover, a transcribed digit, or an
+              unclaimed deduction is invisible to a hurried reviewer but
+              expensive to the client. CPAs have time to spot-check, not to
+              line-by-line verify every figure, and existing software checks
+              arithmetic, not <em>completeness</em>.
+            </p>
+
+            <h2>Approach</h2>
+            <ul>
+              <li>
+                <strong>Document intelligence:</strong> parse heterogeneous tax
+                documents into structured facts (amounts, dates, entity names)
+                with source locations preserved for audit trails.
+              </li>
+              <li>
+                <strong>Agent orchestration:</strong> an LLM-driven review agent
+                plans its own pass over the return: which documents to pull,
+                which line items to verify, which cross-return heuristics to
+                apply (carryover consistency, prior-year deltas, common missed
+                deductions).
+              </li>
+              <li>
+                <strong>Findings, not vibes:</strong> every flagged issue cites
+                the document, the line, and the mismatched value — a reviewer
+                confirms or dismisses rather than re-doing the work.
+              </li>
+              <li>
+                <strong>Synthetic evaluation set:</strong> trained and measured
+                against mock tax data with injected error classes, so detection
+                accuracy (90%+) is a measured number, not a demo trick.
+              </li>
+            </ul>
+
+            <h2>Outcome</h2>
+            <p>
+              The project placed <strong>3rd</strong> at the Innovation Lab
+              Competition. More importantly, it was the prototype of what I now
+              build full-time at Juno: agentic tax review with year-over-year
+              comparison, carryover-loss verification, and optimal-strategy
+              checks. The jump from capstone-era prototype to production CPA
+              tooling is the throughline of my career so far.
+            </p>
+
+            <div class="project-nav">
+              <a class="btn" href="legal-agent-benchmarking.html"><i class="fas fa-arrow-left"></i> Prev: Legal Agent Benchmarking</a>
+              <a class="btn btn-primary" href="museum-accessibility-aid.html">Next: Museum Accessibility Aid <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <footer style="background-color: var(--terminal-bg-secondary); padding: 2rem 0; text-align: center; border-top: 1px solid var(--terminal-border)">
+      <div class="container">
+        <p style="margin: 0; color: var(--terminal-text-dim); font-size: var(--font-size-small)">© 2026 Travis Jankowski</p>
+      </div>
+    </footer>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Museum Exhibit Accessibility Aid - Travis Jankowski</title>
+    <meta
+      name="description"
+      content="2nd Place at Hacksgiving 2024: a mobile app for Discovery World visitors that senses nearby exhibits with ESP32 Bluetooth beacons and uses LLM agents with a vector database to adapt content to each visitor."
+    />
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/project.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar" id="navbar">
+      <div class="container">
+        <a href="../index.html" class="navbar-brand">travis@portfolio:~$</a>
+        <button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="navbar-nav" id="navbar-nav">
+          <li><a href="../index.html#home">Home</a></li>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#experience">Experience</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container breadcrumb-bar">
+      <div class="breadcrumb"><a href="../index.html#projects">projects</a> / museum-accessibility-aid/</div>
+    </div>
+
+    <section class="project-page-hero">
+      <div class="container">
+        <div class="project-icon"><i class="fas fa-universal-access"></i></div>
+        <h1>Museum Exhibit Accessibility Aid</h1>
+        <p class="project-tagline">
+          Walk up to an exhibit at Discovery World; your phone notices, and the
+          exhibit starts explaining itself at the right level, in the right
+          language.
+        </p>
+        <span class="award-banner"><i class="fas fa-trophy"></i> 2nd Place — Hacksgiving 2024 (Team Yarrvis)</span>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 1rem">
+      <div class="container">
+        <div class="project-layout">
+          <aside class="project-sidebar">
+            <div class="card">
+              <h3>At a glance</h3>
+              <ul class="meta-list">
+                <li><span class="meta-label">Event</span><span class="meta-value">Hacksgiving 2024, Discovery World</span></li>
+                <li><span class="meta-label">Placement</span><span class="meta-value">2nd place (Team Yarrvis)</span></li>
+                <li><span class="meta-label">Source</span><br /><a href="https://github.com/xDazld/HacksGiving-2024" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a></li>
+                <li><span class="meta-label">Components</span><span class="meta-value">Mobile app · ESP32 BLE beacons · LLM agents · RAG backend</span></li>
+              </ul>
+            </div>
+          </aside>
+
+          <article class="project-body">
+            <h2>Problem</h2>
+            <p>
+              Museum placards are written for one imaginary visitor. A
+              nine-year-old, a visually impaired adult, and a Spanish-speaking
+              tourist all get the same wall of text — and museum accessibility
+              staff can't hand-tailor every exhibit for every guest. Discovery
+              World's Hacksgiving 2024 theme asked for exactly this: use
+              technology to make exhibits work harder for every kind of
+              visitor.
+            </p>
+
+            <h2>Architecture</h2>
+            <ul>
+              <li>
+                <strong>Presence sensing (hardware):</strong> ESP32
+                Bluetooth-low-energy beacons mounted at exhibits broadcast their
+                identity; the visitor's phone resolves which exhibit is nearby
+                from signal strength — no beacons to scan, no QR codes to hunt.
+              </li>
+              <li>
+                <strong>Context service (AhaAPI):</strong> a backend maps beacon
+                events to exhibit metadata and the visitor's profile: age band,
+                native language, and accessibility needs.
+              </li>
+              <li>
+                <strong>LLM agents + vector database:</strong> exhibit content
+                is retrieved with RAG from an embedding-indexed corpus, then a
+                generation agent rewrites it on demand — simplifying for a
+                child, translating, or producing audio-described text for screen
+                readers — grounded so it never invents facts about the exhibit.
+              </li>
+              <li>
+                <strong>Mobile client:</strong> reacts to proximity transitions
+                and presents adapted content conversationally.
+              </li>
+            </ul>
+
+            <figure class="figure">
+              <svg viewBox="0 0 940 190" role="img" aria-label="Museum aid system architecture">
+                <defs>
+                  <marker id="a3" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                    <path d="M0,0 L8,4 L0,8 Z" fill="var(--terminal-green-dim)" />
+                  </marker>
+                </defs>
+                <rect class="dgm-box" x="20" y="60" width="140" height="70" rx="4" />
+                <text class="dgm-label" x="90" y="88" text-anchor="middle" font-size="13">ESP32 beacons</text>
+                <text class="dgm-label-dim" x="90" y="108" text-anchor="middle" font-size="10">BLE at each exhibit</text>
+
+                <rect class="dgm-box" x="210" y="60" width="140" height="70" rx="4" />
+                <text class="dgm-label" x="280" y="88" text-anchor="middle" font-size="13">Mobile app</text>
+                <text class="dgm-label-dim" x="280" y="108" text-anchor="middle" font-size="10">proximity + profile</text>
+
+                <rect class="dgm-box" x="400" y="60" width="150" height="70" rx="4" />
+                <text class="dgm-label" x="475" y="88" text-anchor="middle" font-size="13">AhaAPI backend</text>
+                <text class="dgm-label-dim" x="475" y="108" text-anchor="middle" font-size="10">exhibit metadata</text>
+
+                <rect class="dgm-box-accent" x="600" y="60" width="170" height="70" rx="4" />
+                <text class="dgm-label-green" x="685" y="88" text-anchor="middle" font-size="13">LLM + RAG</text>
+                <text class="dgm-label-dim" x="685" y="108" text-anchor="middle" font-size="10">vector DB · agents</text>
+
+                <rect class="dgm-box" x="820" y="60" width="100" height="70" rx="4" />
+                <text class="dgm-label" x="870" y="88" text-anchor="middle" font-size="13">Visitor</text>
+                <text class="dgm-label-dim" x="870" y="108" text-anchor="middle" font-size="10">adapted text/audio</text>
+
+                <line class="dgm-line-green" x1="160" y1="95" x2="208" y2="95" marker-end="url(#a3)" />
+                <line class="dgm-line-green" x1="350" y1="95" x2="398" y2="95" marker-end="url(#a3)" />
+                <line class="dgm-line-green" x1="550" y1="95" x2="598" y2="95" marker-end="url(#a3)" />
+                <line class="dgm-line-green" x1="770" y1="95" x2="818" y2="95" marker-end="url(#a3)" />
+              </svg>
+              <figcaption>Beacon → phone → context API → retrieval-augmented generation → the visitor.</figcaption>
+            </figure>
+
+            <h2>Outcome</h2>
+            <p>
+              Built in ~36 hours and awarded <strong>2nd place</strong> out of the
+              Hacksgiving field. The demo showed the same exhibit placard
+              rendered three ways — kid-level English, Spanish, and a
+              screen-reader-friendly description — switching live as the
+              visitor profile changed. It was also my first production-grade use
+              of RAG with agent orchestration, a pattern I've built on
+              professionally ever since.
+            </p>
+
+            <div class="project-nav">
+              <a class="btn" href="tax-review-agent.html"><i class="fas fa-arrow-left"></i> Prev: Tax Review Agent</a>
+              <a class="btn btn-primary" href="homelab.html">Next: Homelab Infrastructure <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <footer style="background-color: var(--terminal-bg-secondary); padding: 2rem 0; text-align: center; border-top: 1px solid var(--terminal-border)">
+      <div class="container">
+        <p style="margin: 0; color: var(--terminal-text-dim); font-size: var(--font-size-small)">© 2026 Travis Jankowski</p>
+      </div>
+    </footer>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>

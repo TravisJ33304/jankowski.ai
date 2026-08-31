@@ -1,0 +1,253 @@
+/* Shared styles for individual project pages */
+
+.breadcrumb-bar {
+  padding: 7.5rem 0 0 0;
+}
+
+.breadcrumb {
+  font-size: var(--font-size-small);
+  color: var(--terminal-text-dim);
+}
+
+.breadcrumb a {
+  color: var(--terminal-green);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--terminal-green-bright);
+  text-shadow: 0 0 8px var(--terminal-shadow);
+}
+
+.project-page-hero {
+  padding: 2rem 0 1rem 0;
+  border-bottom: 1px dashed var(--terminal-border);
+  margin-bottom: 2rem;
+}
+
+.project-page-hero .project-icon {
+  font-size: 2.5rem;
+  color: var(--terminal-green);
+  margin-bottom: 1rem;
+}
+
+.project-page-hero h1 {
+  margin-bottom: 0.75rem;
+}
+
+.project-page-hero .project-tagline {
+  color: var(--terminal-text-dim);
+  font-size: var(--font-size-large);
+  max-width: 800px;
+}
+
+.award-banner {
+  display: inline-block;
+  border: 1px solid var(--terminal-green-dim);
+  color: var(--terminal-green-bright);
+  padding: 0.35rem 0.9rem;
+  font-size: var(--font-size-small);
+  margin-top: 1rem;
+  background-color: rgba(0, 255, 0, 0.05);
+}
+
+/* Two-column article layout */
+.project-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.project-sidebar {
+  position: sticky;
+  top: 100px;
+}
+
+.project-sidebar .card h3 {
+  margin-top: 0;
+}
+
+.meta-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: var(--font-size-small);
+}
+
+.meta-list li {
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.meta-list .meta-label {
+  color: var(--terminal-text-dim);
+  display: block;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.meta-list .meta-value {
+  color: var(--terminal-text);
+}
+
+.project-body h2 {
+  font-size: var(--font-size-h3);
+  margin-top: 2.5rem;
+}
+
+.project-body h2::before {
+  content: "> ";
+  color: var(--terminal-green);
+}
+
+.project-body p,
+.project-body li {
+  color: var(--terminal-text);
+  line-height: var(--line-height-base);
+}
+
+.project-body ul li,
+.project-body ol li {
+  margin-bottom: 0.5rem;
+}
+
+.project-body a {
+  color: var(--terminal-green);
+}
+
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-small);
+  margin: 1.5rem 0;
+}
+
+.spec-table th,
+.spec-table td {
+  border: 1px solid var(--terminal-border);
+  padding: 0.6rem 0.9rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.spec-table th {
+  color: var(--terminal-green);
+  background-color: var(--terminal-bg-secondary);
+  font-weight: normal;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.spec-table td {
+  color: var(--terminal-text);
+}
+
+/* Figures with terminal frames */
+.figure {
+  margin: 2rem 0;
+  border: 1px solid var(--terminal-border);
+  background-color: var(--terminal-bg-secondary);
+  padding: 1.5rem;
+  overflow-x: auto;
+}
+
+.figure figcaption {
+  color: var(--terminal-text-dim);
+  font-size: var(--font-size-small);
+  margin-top: 1rem;
+  text-align: center;
+  border-top: 1px dashed var(--terminal-border);
+  padding-top: 0.75rem;
+}
+
+.figure svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Diagram SVG theme hooks */
+.dgm-box {
+  fill: var(--terminal-bg);
+  stroke: var(--terminal-border);
+  stroke-width: 1.5;
+}
+
+.dgm-box-accent {
+  fill: var(--terminal-bg);
+  stroke: var(--terminal-green-dim);
+  stroke-width: 1.5;
+}
+
+.dgm-label {
+  font-family: "Roboto Mono", "Courier New", monospace;
+  fill: var(--terminal-text);
+}
+
+.dgm-label-green {
+  font-family: "Roboto Mono", "Courier New", monospace;
+  fill: var(--terminal-green);
+}
+
+.dgm-label-dim {
+  font-family: "Roboto Mono", "Courier New", monospace;
+  fill: var(--terminal-text-dim);
+}
+
+.dgm-line {
+  stroke: var(--terminal-text-dim);
+  stroke-width: 1.2;
+  fill: none;
+}
+
+.dgm-line-green {
+  stroke: var(--terminal-green-dim);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.dgm-line-dashed {
+  stroke-dasharray: 5 4;
+}
+
+/* Terminal code block */
+.term-block {
+  background-color: var(--terminal-bg);
+  border: 1px solid var(--terminal-border);
+  border-left: 3px solid var(--terminal-green-dim);
+  padding: 1rem 1.25rem;
+  font-size: var(--font-size-small);
+  color: var(--terminal-text);
+  overflow-x: auto;
+  white-space: pre;
+  margin: 1.5rem 0;
+}
+
+.term-block .prompt {
+  color: var(--terminal-green);
+}
+
+/* Navigation footer on project pages */
+.project-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px dashed var(--terminal-border);
+}
+
+@media (max-width: 900px) {
+  .project-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .project-sidebar {
+    position: static;
+  }
+}

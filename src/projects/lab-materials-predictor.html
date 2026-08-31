@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab Materials Volume Predictor - Travis Jankowski</title>
+    <meta
+      name="description"
+      content="1st Place at the MSOE Innovation Lab Competition: a desktop application using segmentation and regression neural networks to predict lab container volumes from images for Brady Corp, with 90% accuracy."
+    />
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/project.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar" id="navbar">
+      <div class="container">
+        <a href="../index.html" class="navbar-brand">travis@portfolio:~$</a>
+        <button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="navbar-nav" id="navbar-nav">
+          <li><a href="../index.html#home">Home</a></li>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#experience">Experience</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container breadcrumb-bar">
+      <div class="breadcrumb"><a href="../index.html#projects">projects</a> / lab-materials-predictor/</div>
+    </div>
+
+    <section class="project-page-hero">
+      <div class="container">
+        <div class="project-icon"><i class="fas fa-flask"></i></div>
+        <h1>Lab Materials Volume Predictor</h1>
+        <p class="project-tagline">
+          Point a camera at a lab container, get its volume back — segmentation
+          and regression networks packaged as a desktop app for Brady Corp.
+        </p>
+        <span class="award-banner"><i class="fas fa-trophy"></i> 1st Place — Innovation Lab Competition</span>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 1rem">
+      <div class="container">
+        <div class="project-layout">
+          <aside class="project-sidebar">
+            <div class="card">
+              <h3>At a glance</h3>
+              <ul class="meta-list">
+                <li><span class="meta-label">Customer</span><span class="meta-value">Brady Corporation</span></li>
+                <li><span class="meta-label">Recognition</span><span class="meta-value">1st Place, Innovation Lab Competition</span></li>
+                <li><span class="meta-label">Accuracy</span><span class="meta-value">~90% volume prediction</span></li>
+                <li><span class="meta-label">Deliverable</span><span class="meta-value">Windows desktop application</span></li>
+                <li><span class="meta-label">Code</span><span class="meta-value">Hosted on GitLab (MSOE)</span></li>
+              </ul>
+            </div>
+          </aside>
+
+          <article class="project-body">
+            <h2>Problem</h2>
+            <p>
+              Brady Corp's lab-materials teams manage thousands of container
+              SKUs — beakers, bottles, jars, carboys — and labeling and inventory
+              workflows depend on knowing each container's volume. That metadata
+              is often missing, inconsistent, or only recoverable by manually
+              measuring physical samples, which stalls product-data work.
+            </p>
+
+            <h2>Approach</h2>
+            <ul>
+              <li>
+                <strong>Segmentation network:</strong> isolate the container from
+                the background in a photograph so measurements aren't polluted by
+                whatever the item was photographed on.
+              </li>
+              <li>
+                <strong>Regression network:</strong> map the segmented container
+                image (with a reference object for scale) to a volume estimate,
+                learning the shape → capacity relationship across container
+                families instead of hand-coded geometry.
+              </li>
+              <li>
+                <strong>Desktop packaging:</strong> a polished application rather
+                than a notebook — camera capture, inference, and confidence
+                reporting in a workflow lab staff could use immediately.
+              </li>
+            </ul>
+
+            <h2>Outcome</h2>
+            <p>
+              The system predicts container volumes from a single photo with
+              roughly 90% accuracy and took <strong>1st place</strong> at the
+              MSOE Innovation Lab Competition, Brady's internal showcase where
+              student teams present to engineers and leadership. The project
+              sharpened the exact skills my hiring managers later cared about:
+              taking a fuzzy business ask ("get us volumes"), building a
+              computer-vision pipeline end to end, and demoing it to a
+              non-technical audience.
+            </p>
+
+            <h2>Related</h2>
+            <p>
+              My later research on 3D manufacturing perception — cross-category
+              zero-shot anomaly detection on point clouds — continues as
+              <a href="https://github.com/TravisJ33304/OptiQual3D" target="_blank" rel="noopener"
+                >OptiQual3D on GitHub</a
+              >.
+            </p>
+
+            <div class="project-nav">
+              <a class="btn" href="hydro-turbine-control.html"><i class="fas fa-arrow-left"></i> Prev: Hydro Turbine Control</a>
+              <a class="btn btn-primary" href="legal-agent-benchmarking.html">Next: Legal Agent Benchmarking <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <footer style="background-color: var(--terminal-bg-secondary); padding: 2rem 0; text-align: center; border-top: 1px solid var(--terminal-border)">
+      <div class="container">
+        <p style="margin: 0; color: var(--terminal-text-dim); font-size: var(--font-size-small)">© 2026 Travis Jankowski</p>
+      </div>
+    </footer>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>

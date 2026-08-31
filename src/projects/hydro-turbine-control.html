@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hydro Turbine-Generator Control System - Travis Jankowski</title>
+    <meta
+      name="description"
+      content="Senior Capstone for L&S Electric: an intelligent control system using machine learning to automate hydro turbine-generator tuning in real time."
+    />
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/project.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar" id="navbar">
+      <div class="container">
+        <a href="../index.html" class="navbar-brand">travis@portfolio:~$</a>
+        <button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="navbar-nav" id="navbar-nav">
+          <li><a href="../index.html#home">Home</a></li>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#experience">Experience</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container breadcrumb-bar">
+      <div class="breadcrumb"><a href="../index.html#projects">projects</a> / hydro-turbine-control/</div>
+    </div>
+
+    <section class="project-page-hero">
+      <div class="container">
+        <div class="project-icon"><i class="fas fa-robot"></i></div>
+        <h1>Hydro Turbine-Generator Control System</h1>
+        <p class="project-tagline">
+          MSOE Senior Capstone for L&S Electric: machine-learned optimization of
+          hydro turbine-generator control tuning.
+        </p>
+        <span class="award-banner"><i class="fas fa-graduation-cap"></i> Senior Capstone · Sponsor: L&amp;S Electric</span>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 1rem">
+      <div class="container">
+        <div class="project-layout">
+          <aside class="project-sidebar">
+            <div class="card">
+              <h3>At a glance</h3>
+              <ul class="meta-list">
+                <li><span class="meta-label">Timeline</span><span class="meta-value">2025–2026 academic year</span></li>
+                <li><span class="meta-label">Sponsor</span><span class="meta-value">L&S Electric (Elkhart Lake, WI)</span></li>
+                <li><span class="meta-label">Team</span><span class="meta-value">MSOE Capstone team</span></li>
+                <li><span class="meta-label">Code</span><span class="meta-value">Hosted on GitLab (MSOE)</span></li>
+                <li>
+                  <span class="meta-label">Domains</span>
+                  <span class="meta-value">Control systems · ML · embedded</span>
+                </li>
+              </ul>
+            </div>
+          </aside>
+
+          <article class="project-body">
+            <h2>Problem</h2>
+            <p>
+              Small hydro turbines are frequently retrofitted into existing
+              mill and dam infrastructure, where operating conditions (head,
+              flow, load) vary seasonally. Tuning the governor and voltage
+              regulator control loops for these plants is traditionally a slow,
+              manual process performed by specialist engineers against
+              manufacturer guidelines — expensive, hard to schedule, and rarely
+              revisited once the plant is running.
+            </p>
+            <p>
+              L&S Electric sponsored this capstone to explore whether an
+              intelligent control layer could automate that tuning: observing
+              turbine-generator dynamics and converging on control settings that
+              maximize stability and response quality in real time.
+            </p>
+
+            <h2>Approach</h2>
+            <ul>
+              <li>
+                <strong>System identification:</strong> characterize the
+                turbine-generator response from sensor data to build a usable
+                dynamic model of the plant.
+              </li>
+              <li>
+                <strong>ML-driven optimization:</strong> apply machine learning
+                and optimization techniques to propose and evaluate controller
+                gains, replacing manual trial-and-error with an automated search
+                over the tuning parameter space.
+              </li>
+              <li>
+                <strong>Real-time execution:</strong> run the tuning loop on
+                embedded hardware so the system can adapt online rather than
+                requiring an offline engineering pass.
+              </li>
+              <li>
+                <strong>Safety envelope:</strong> constrain every proposed
+                setting within validated bounds so automated tuning can never
+                drive the generator outside stable operating regions.
+              </li>
+            </ul>
+
+            <h2>Outcome</h2>
+            <p>
+              The team delivered a working control system prototype demonstrating
+              automated tuning against L&S's use case, presented to the sponsor
+              at capstone design and implementation reviews. The project gave me
+              end-to-end ownership across the stack I care most about — sensor
+              data acquisition, model training, and deployment on constrained
+              embedded targets — under a real industrial customer with real
+              acceptance criteria.
+            </p>
+
+            <h2>Tech</h2>
+            <div class="project-tech" style="margin-bottom: 1rem">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Machine Learning</span>
+              <span class="tech-tag">Control Systems</span>
+              <span class="tech-tag">Embedded Systems</span>
+              <span class="tech-tag">Real-time Processing</span>
+              <span class="tech-tag">Sensor Fusion</span>
+            </div>
+            <p style="color: var(--terminal-text-dim); font-size: var(--font-size-small)">
+              Source is maintained on GitLab for MSOE capstone delivery;
+              contact me if you'd like a walkthrough of the implementation.
+            </p>
+
+            <div class="project-nav">
+              <a class="btn" href="../index.html#projects"><i class="fas fa-arrow-left"></i> All Projects</a>
+              <a class="btn btn-primary" href="lab-materials-predictor.html">Next: Lab Materials Predictor <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <footer style="background-color: var(--terminal-bg-secondary); padding: 2rem 0; text-align: center; border-top: 1px solid var(--terminal-border)">
+      <div class="container">
+        <p style="margin: 0; color: var(--terminal-text-dim); font-size: var(--font-size-small)">© 2026 Travis Jankowski</p>
+      </div>
+    </footer>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>

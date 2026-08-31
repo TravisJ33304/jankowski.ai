@@ -19,9 +19,10 @@ function initNavigation() {
   // Smooth scrolling for all internal navigation links
   allInternalLinks.forEach((link) => {
     link.addEventListener("click", function (e) {
-      e.preventDefault();
       const targetId = this.getAttribute("href");
       const targetSection = document.querySelector(targetId);
+      if (!targetSection) return; // cross-page anchors (e.g. ../index.html#about)
+      e.preventDefault();
 
       if (targetSection) {
         const offsetTop = targetSection.offsetTop - 80; // Account for fixed navbar

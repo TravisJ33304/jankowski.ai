@@ -26,9 +26,17 @@ A modern, responsive personal portfolio website featuring a terminal-inspired de
 src/
 ├── index.html              # Main HTML file
 ├── styles/
-│   └── main.css           # Main stylesheet with terminal theme
+│   ├── main.css           # Main stylesheet with terminal theme
+│   └── project.css        # Shared styles for project detail pages
 ├── scripts/
 │   └── main.js           # Main JavaScript functionality
+├── projects/             # Individual project deep-dives
+│   ├── hydro-turbine-control.html
+│   ├── lab-materials-predictor.html
+│   ├── legal-agent-benchmarking.html
+│   ├── tax-review-agent.html
+│   ├── museum-accessibility-aid.html
+│   └── homelab.html
 └── img/                  # Image assets
     ├── favicon.ico       # Favicon
     └── portrait.jpg      # Profile image

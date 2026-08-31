@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homelab Infrastructure - Travis Jankowski</title>
+    <meta
+      name="description"
+      content="A budget homelab built as infrastructure-as-code: Proxmox VE, OPNsense, TrueNAS ZFS storage, a self-hosted Headscale mesh VPN, an Oracle Cloud DMZ reverse proxy, full Prometheus/Grafana observability, and an AI agent that triages its own alerts."
+    />
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/project.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+      <div class="container">
+        <a href="../index.html" class="navbar-brand">travis@portfolio:~$</a>
+        <button
+          class="navbar-toggle"
+          id="navbar-toggle"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="navbar-nav" id="navbar-nav">
+          <li><a href="../index.html#home">Home</a></li>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#experience">Experience</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container breadcrumb-bar">
+      <div class="breadcrumb">
+        <a href="../index.html#projects">projects</a> / homelab/
+      </div>
+    </div>
+
+    <!-- Project hero -->
+    <section class="project-page-hero">
+      <div class="container">
+        <div class="project-icon"><i class="fas fa-server"></i></div>
+        <h1>Homelab Infrastructure</h1>
+        <p class="project-tagline">
+          A personal data center run like a production environment: everything
+          defined as code, everything monitored, and an AI agent on call.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 1rem">
+      <div class="container">
+        <div class="project-layout">
+          <!-- Sidebar -->
+          <aside class="project-sidebar">
+            <div class="card">
+              <h3>At a glance</h3>
+              <ul class="meta-list">
+                <li>
+                  <span class="meta-label">Status</span>
+                  <span class="meta-value">Active since 2024, ongoing</span>
+                </li>
+                <li>
+                  <span class="meta-label">Footprint</span>
+                  <span class="meta-value"
+                    >14 hosts · 11TB ZFS · ~30 services</span
+                  >
+                </li>
+                <li>
+                  <span class="meta-label">Managed by</span>
+                  <span class="meta-value"
+                    >Ansible IaC (~20 playbooks, vaulted secrets)</span
+                  >
+                </li>
+                <li>
+                  <span class="meta-label">Key stack</span>
+                  <span class="meta-value"
+                    >Proxmox VE · OPNsense · TrueNAS · Headscale · Caddy ·
+                    Prometheus/Grafana · Docker · Hermes Agent</span
+                  >
+                </li>
+                <li>
+                  <span class="meta-label">Public URLs</span>
+                  <span class="meta-value">*.jankowski.ai</span>
+                </li>
+              </ul>
+            </div>
+          </aside>
+
+          <!-- Body -->
+          <article class="project-body">
+            <h2>The idea</h2>
+            <p>
+              The homelab started as a media server and turned into a full
+              private cloud. The governing rule is
+              <strong>infrastructure-as-code</strong>: every host config,
+              container definition, firewall note, and alert rule lives in a
+              Git repository and is deployed by Ansible. If it can't be
+              reproduced with a playbook run, it doesn't belong on a host. The
+              lab runs real workloads — family media, budgeting, recipes,
+              password management, household inventory, a personal CRM, local AI
+              inference — under the same discipline I bring to production
+              engineering.
+            </p>
+
+            <h2>Architecture</h2>
+            <p>
+              The network is split into three zones: an Oracle Cloud
+              Always-Free VM acting as an internet-facing DMZ, a self-hosted
+              WireGuard mesh (Headscale) connecting everything, and the home
+              LAN behind OPNsense where the real hardware lives.
+            </p>
+
+            <figure class="figure">
+              <svg
+                viewBox="0 0 940 640"
+                role="img"
+                aria-label="Homelab network architecture diagram"
+              >
+                <!-- Internet -->
+                <rect class="dgm-box" x="360" y="20" width="220" height="50" rx="25" />
+                <text class="dgm-label-green" x="470" y="51" text-anchor="middle" font-size="16">INTERNET</text>
+
+                <!-- Oracle DMZ -->
+                <rect class="dgm-box-accent" x="180" y="110" width="580" height="150" rx="4" />
+                <text class="dgm-label-green" x="200" y="136" font-size="14">ORACLE CLOUD — DMZ (ARM Always-Free)</text>
+
+                <rect class="dgm-box" x="210" y="152" width="240" height="90" rx="4" />
+                <text class="dgm-label" x="330" y="176" text-anchor="middle" font-size="14">hexzproxy</text>
+                <text class="dgm-label-dim" x="330" y="196" text-anchor="middle" font-size="11">Caddy (TLS, *.jankowski.ai)</text>
+                <text class="dgm-label-dim" x="330" y="212" text-anchor="middle" font-size="11">CrowdSec + fail2ban + UFW</text>
+                <text class="dgm-label-dim" x="330" y="228" text-anchor="middle" font-size="11">Uptime Kuma (external probes)</text>
+
+                <rect class="dgm-box" x="480" y="152" width="250" height="90" rx="4" />
+                <text class="dgm-label" x="605" y="176" text-anchor="middle" font-size="14">Headscale control plane</text>
+                <text class="dgm-label-dim" x="605" y="196" text-anchor="middle" font-size="11">DERP relay + STUN</text>
+                <text class="dgm-label-dim" x="605" y="212" text-anchor="middle" font-size="11">vpn.jankowski.ai</text>
+                <text class="dgm-label-dim" x="605" y="228" text-anchor="middle" font-size="11">100.64.0.0/10 tailnet</text>
+
+                <!-- arrows internet -> caddy -->
+                <line class="dgm-line-green" x1="440" y1="70" x2="360" y2="110" marker-end="url(#arrow-g)" />
+                <line class="dgm-line-green" x1="500" y1="70" x2="580" y2="110" marker-end="url(#arrow-g)" />
+                <defs>
+                  <marker id="arrow-g" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                    <path d="M0,0 L8,4 L0,8 Z" fill="var(--terminal-green-dim)" />
+                  </marker>
+                  <marker id="arrow-d" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                    <path d="M0,0 L8,4 L0,8 Z" fill="var(--terminal-text-dim)" />
+                  </marker>
+                </defs>
+
+                <!-- mesh tunnel -->
+                <line class="dgm-line dgm-line-dashed dgm-line-green" x1="605" y1="260" x2="605" y2="330" marker-end="url(#arrow-g)" />
+                <text class="dgm-label-green" x="620" y="300" font-size="12">WireGuard mesh (no port forwarding)</text>
+
+                <!-- Home LAN -->
+                <rect class="dgm-box-accent" x="40" y="330" width="860" height="290" rx="4" />
+                <text class="dgm-label-green" x="60" y="356" font-size="14">HOME LAN — 10.213.45.0/24 (behind OPNsense)</text>
+
+                <rect class="dgm-box" x="65" y="375" width="150" height="70" rx="4" />
+                <text class="dgm-label" x="140" y="400" text-anchor="middle" font-size="14">opnsense</text>
+                <text class="dgm-label-dim" x="140" y="418" text-anchor="middle" font-size="11">firewall / gateway</text>
+                <text class="dgm-label-dim" x="140" y="433" text-anchor="middle" font-size="11">DNS · VLAN</text>
+
+                <!-- TrueNAS -->
+                <rect class="dgm-box" x="65" y="470" width="150" height="95" rx="4" />
+                <text class="dgm-label" x="140" y="494" text-anchor="middle" font-size="14">hexztruenas</text>
+                <text class="dgm-label-dim" x="140" y="512" text-anchor="middle" font-size="11">ZFS · 11TB data</text>
+                <text class="dgm-label-dim" x="140" y="527" text-anchor="middle" font-size="11">500GB backup pool</text>
+                <text class="dgm-label-dim" x="140" y="542" text-anchor="middle" font-size="11">NFSv3 exports</text>
+                <text class="dgm-label-dim" x="140" y="557" text-anchor="middle" font-size="11">scrub + snapshot plans</text>
+
+                <!-- Proxmox -->
+                <rect class="dgm-box" x="250" y="375" width="500" height="230" rx="4" />
+                <text class="dgm-label" x="270" y="398" font-size="14">hexz690 — Proxmox VE hypervisor</text>
+
+                <rect class="dgm-box-accent" x="270" y="412" width="145" height="55" rx="3" />
+                <text class="dgm-label" x="342" y="433" text-anchor="middle" font-size="12">hexzdocker</text>
+                <text class="dgm-label-dim" x="342" y="450" text-anchor="middle" font-size="10">media + monitoring LXCs</text>
+
+                <rect class="dgm-box-accent" x="430" y="412" width="145" height="55" rx="3" />
+                <text class="dgm-label" x="502" y="433" text-anchor="middle" font-size="12">hexzjellyfin</text>
+                <text class="dgm-label-dim" x="502" y="450" text-anchor="middle" font-size="10">4K HDR · iGPU transcode</text>
+
+                <rect class="dgm-box-accent" x="590" y="412" width="140" height="55" rx="3" />
+                <text class="dgm-label" x="660" y="433" text-anchor="middle" font-size="12">hexzai</text>
+                <text class="dgm-label-dim" x="660" y="450" text-anchor="middle" font-size="10">Arc Pro B70 · LLM</text>
+
+                <rect class="dgm-box-accent" x="270" y="482" width="145" height="55" rx="3" />
+                <text class="dgm-label" x="342" y="503" text-anchor="middle" font-size="12">hexzhermes</text>
+                <text class="dgm-label-dim" x="342" y="520" text-anchor="middle" font-size="10">AI ops agent</text>
+
+                <rect class="dgm-box-accent" x="430" y="482" width="145" height="55" rx="3" />
+                <text class="dgm-label" x="502" y="503" text-anchor="middle" font-size="12">hexzpbs</text>
+                <text class="dgm-label-dim" x="502" y="520" text-anchor="middle" font-size="10">backup server</text>
+
+                <rect class="dgm-box-accent" x="590" y="482" width="140" height="55" rx="3" />
+                <text class="dgm-label" x="660" y="503" text-anchor="middle" font-size="12">+ 4 more LXCs</text>
+                <text class="dgm-label-dim" x="660" y="520" text-anchor="middle" font-size="10">budget·recipes·CRM·grocery</text>
+
+                <text class="dgm-label-dim" x="270" y="575" font-size="11">9 LXCs · kernels patched via Ansible · PBS snapshots → TrueNAS NFS</text>
+
+                <!-- home assistant -->
+                <rect class="dgm-box" x="785" y="375" width="95" height="70" rx="4" />
+                <text class="dgm-label" x="832" y="400" text-anchor="middle" font-size="12">hexzhome</text>
+                <text class="dgm-label-dim" x="832" y="418" text-anchor="middle" font-size="10">Home Assistant</text>
+                <text class="dgm-label-dim" x="832" y="432" text-anchor="middle" font-size="10">+ voice pipeline</text>
+
+                <!-- LAN lines -->
+                <line class="dgm-line" x1="215" y1="410" x2="250" y2="430" marker-end="url(#arrow-d)" />
+                <line class="dgm-line" x1="215" y1="517" x2="250" y2="500" marker-end="url(#arrow-d)" />
+                <text class="dgm-label-dim" x="360" y="620" font-size="11">NFS mounts · management VLAN · wireguard peers into mesh</text>
+              </svg>
+              <figcaption>
+                Figure 1 — Network topology. Public traffic terminates at the
+                Oracle DMZ; everything reaches the LAN through the Headscale
+                mesh, so no services are port-forwarded at home.
+              </figcaption>
+            </figure>
+
+            <h2>The AI ops layer</h2>
+            <p>
+              The piece I'm proudest of: alerts don't just page me — an AI agent
+              investigates first. Prometheus rules route through Alertmanager to
+              a webhook adapter on the agent host, which wakes an LLM-driven
+              session with SSH access to the fleet and the runbook repository.
+              The agent reproduces the symptom, forms a hypothesis, applies
+              low-risk remediation (service restarts, cache cleanup, config
+              re-deploy), and posts a write-up to Discord. Incidents leave
+              behind markdown post-mortems committed to the same repo, so the
+              next occurrence starts with documentation already written.
+            </p>
+
+            <figure class="figure">
+              <svg viewBox="0 0 940 200" role="img" aria-label="AI alert remediation loop diagram">
+                <defs>
+                  <marker id="a2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                    <path d="M0,0 L8,4 L0,8 Z" fill="var(--terminal-green-dim)" />
+                  </marker>
+                </defs>
+                <rect class="dgm-box" x="20" y="60" width="150" height="70" rx="4" />
+                <text class="dgm-label" x="95" y="88" text-anchor="middle" font-size="13">Metric breach</text>
+                <text class="dgm-label-dim" x="95" y="108" text-anchor="middle" font-size="10">node/cadvisor/blackbox</text>
+
+                <rect class="dgm-box" x="220" y="60" width="150" height="70" rx="4" />
+                <text class="dgm-label" x="295" y="88" text-anchor="middle" font-size="13">Alertmanager</text>
+                <text class="dgm-label-dim" x="295" y="108" text-anchor="middle" font-size="10">routing · dedupe · silence</text>
+
+                <rect class="dgm-box-accent" x="420" y="60" width="170" height="70" rx="4" />
+                <text class="dgm-label-green" x="505" y="88" text-anchor="middle" font-size="13">Hermes agent</text>
+                <text class="dgm-label-dim" x="505" y="108" text-anchor="middle" font-size="10">LLM + SSH + runbooks</text>
+
+                <rect class="dgm-box" x="640" y="60" width="140" height="70" rx="4" />
+                <text class="dgm-label" x="710" y="88" text-anchor="middle" font-size="13">Remediate</text>
+                <text class="dgm-label-dim" x="710" y="108" text-anchor="middle" font-size="10">restart · redeploy</text>
+
+                <rect class="dgm-box" x="830" y="60" width="95" height="70" rx="4" />
+                <text class="dgm-label" x="877" y="88" text-anchor="middle" font-size="13">Discord</text>
+                <text class="dgm-label-dim" x="877" y="108" text-anchor="middle" font-size="10">write-up</text>
+
+                <line class="dgm-line-green" x1="170" y1="95" x2="218" y2="95" marker-end="url(#a2)" />
+                <line class="dgm-line-green" x1="370" y1="95" x2="418" y2="95" marker-end="url(#a2)" />
+                <line class="dgm-line-green" x1="590" y1="95" x2="638" y2="95" marker-end="url(#a2)" />
+                <line class="dgm-line-green" x1="780" y1="95" x2="828" y2="95" marker-end="url(#a2)" />
+                <path class="dgm-line-green dgm-line-dashed" d="M 710 130 Q 710 185 505 185 Q 95 185 95 132" marker-end="url(#a2)" />
+                <text class="dgm-label-dim" x="400" y="180" text-anchor="middle" font-size="11">post-mortem docs → back into the loop</text>
+              </svg>
+              <figcaption>
+                Figure 2 — The alert-to-resolution loop: humans see the summary,
+                not the pager noise.
+              </figcaption>
+            </figure>
+
+            <h2>The fleet</h2>
+            <table class="spec-table">
+              <thead>
+                <tr>
+                  <th>Host</th>
+                  <th>Platform</th>
+                  <th>Role</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>hexz690</td>
+                  <td>Proxmox VE (Debian)</td>
+                  <td>Hypervisor — 9 LXCs, Arc Pro B70 passthrough</td>
+                </tr>
+                <tr>
+                  <td>opnsense</td>
+                  <td>OPNsense (FreeBSD)</td>
+                  <td>Firewall, gateway, DNS</td>
+                </tr>
+                <tr>
+                  <td>hexztruenas</td>
+                  <td>TrueNAS (FreeBSD)</td>
+                  <td>ZFS storage: 11TB data + 500GB backup pool, NFSv3</td>
+                </tr>
+                <tr>
+                  <td>hexzproxy</td>
+                  <td>Oracle Cloud ARM VM</td>
+                  <td>DMZ: Caddy, Headscale + DERP, CrowdSec, Uptime Kuma</td>
+                </tr>
+                <tr>
+                  <td>hexzdocker</td>
+                  <td>LXC · Docker</td>
+                  <td>Media stack (VPN'd qBit + *arr suite) and monitoring stack (Prometheus, Grafana, Alertmanager)</td>
+                </tr>
+                <tr>
+                  <td>hexzjellyfin</td>
+                  <td>LXC</td>
+                  <td>Jellyfin with Intel iGPU transcode, 4K HDR direct play</td>
+                </tr>
+                <tr>
+                  <td>hexzai</td>
+                  <td>LXC · GPU</td>
+                  <td>llama.cpp SYCL serving a 27B Q4 model on Arc Pro B70, OpenAI-compatible API</td>
+                </tr>
+                <tr>
+                  <td>hexzhermes</td>
+                  <td>LXC</td>
+                  <td>Hermes agent — Discord gateway, Alertmanager remediation adapter</td>
+                </tr>
+                <tr>
+                  <td>hexzpbs</td>
+                  <td>LXC</td>
+                  <td>Proxmox Backup Server, datastore on TrueNAS NFS</td>
+                </tr>
+                <tr>
+                  <td>hexzactual · hexztandoor · hexzmonica · hexzgrocy</td>
+                  <td>LXCs</td>
+                  <td>Family apps: budgeting, recipes, personal CRM, household inventory</td>
+                </tr>
+                <tr>
+                  <td>hexzhome</td>
+                  <td>Home Assistant OS</td>
+                  <td>Smart home + local voice pipeline (STT/TTS), Hermes as conversation agent</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h2>Notable decisions</h2>
+            <ul>
+              <li>
+                <strong>DMZ in the cloud, not at home.</strong> An Oracle
+                Always-Free ARM VM takes all inbound traffic. The house has zero
+                open ports; Caddy terminates TLS and routes
+                <code>*.jankowski.ai</code> to LAN services over the mesh.
+              </li>
+              <li>
+                <strong>Self-hosted WireGuard mesh (Headscale) replacing
+                ZeroTier.</strong> Static mesh IPs (100.64.0.0/10) act as the
+                canonical address plan, survives ISP renumbering, and DERP
+                relays ride the proxy's 443. Migration included a documented
+                outage RCA and a recovery runbook.
+              </li>
+              <li>
+                <strong>Ansible vault + full IaC.</strong> Secrets are
+                encrypted in-repo; playbooks cover baseline config, updates,
+                media/monitoring deploys, hardening, and a fleet-wide health
+                check. Check-mode dry runs and idempotency are part of the
+                workflow.
+              </li>
+              <li>
+                <strong>3-2-1-ish backups.</strong> Proxmox Backup Server on its
+                own LXC, datastore living on TrueNAS ZFS over NFS, snapshots
+                scrubbed on schedule.
+              </li>
+              <li>
+                <strong>Local AI on a budget GPU.</strong> An Intel Arc Pro B70
+                (32GB) serves a 27B Q4 model through llama.cpp SYCL with
+                speculative decoding, behind an OpenAI-compatible API — the
+                inference backend the ops agent runs on.
+              </li>
+              <li>
+                <strong>Hardware reliability as software problems.</strong>
+                A daily NIC-hang crash loop was root-caused to driver/offload
+                interaction and retired with a layered kernel mitigation
+                playbook (sysctl, offload disabling, watchdog, logrotate).
+              </li>
+            </ul>
+
+            <h2>What it taught me</h2>
+            <p>
+              Running this lab is the closest thing to being an on-call SRE for
+              a company of one: capacity planning at 2 a.m., blast-radius
+              thinking before a deploy, and the discipline to write the
+              post-mortem even when nobody else would read it. It also became a
+              proving ground for agentic AI — the alert-remediation pipeline
+              maps directly onto the agent-orchestration work I do professionally
+              at Juno, with the same failure modes (hallucinated fixes, scope
+              creep) needing the same guardrails (approval gates, verification
+              loops, read-only tools by default).
+            </p>
+
+            <div class="project-nav">
+              <a class="btn" href="../index.html#projects"
+                ><i class="fas fa-arrow-left"></i> All Projects</a
+              >
+              <a class="btn btn-primary" href="hydro-turbine-control.html"
+                >Next: Hydro Turbine Control <i class="fas fa-arrow-right"></i
+              ></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      style="
+        background-color: var(--terminal-bg-secondary);
+        padding: 2rem 0;
+        text-align: center;
+        border-top: 1px solid var(--terminal-border);
+      "
+    >
+      <div class="container">
+        <p style="margin: 0; color: var(--terminal-text-dim); font-size: var(--font-size-small)">
+          © 2026 Travis Jankowski
+        </p>
+      </div>
+    </footer>
+
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>

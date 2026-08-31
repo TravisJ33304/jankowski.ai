@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Legal Agent Benchmarking Framework - Travis Jankowski</title>
+    <meta
+      name="description"
+      content="Data Science Practicum with Obviate AI: a novel open-source framework and web application for benchmarking LLM agents on legal contract analysis tasks."
+    />
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/project.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar" id="navbar">
+      <div class="container">
+        <a href="../index.html" class="navbar-brand">travis@portfolio:~$</a>
+        <button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="navbar-nav" id="navbar-nav">
+          <li><a href="../index.html#home">Home</a></li>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#experience">Experience</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container breadcrumb-bar">
+      <div class="breadcrumb"><a href="../index.html#projects">projects</a> / legal-agent-benchmarking/</div>
+    </div>
+
+    <section class="project-page-hero">
+      <div class="container">
+        <div class="project-icon"><i class="fas fa-balance-scale"></i></div>
+        <h1>Legal Agent Benchmarking Framework</h1>
+        <p class="project-tagline">
+          Data Science Practicum with Obviate AI: how do you know your legal AI
+          agent is actually good? A novel framework — and open-source web app —
+          for finding out.
+        </p>
+        <span class="award-banner"><i class="fas fa-flask"></i> MSOE Data Science Practicum · Sponsor: Obviate AI</span>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 1rem">
+      <div class="container">
+        <div class="project-layout">
+          <aside class="project-sidebar">
+            <div class="card">
+              <h3>At a glance</h3>
+              <ul class="meta-list">
+                <li><span class="meta-label">Sponsor</span><span class="meta-value">Obviate AI (legal tech)</span></li>
+                <li><span class="meta-label">Format</span><span class="meta-value">Year-long data science practicum</span></li>
+                <li><span class="meta-label">Output</span><span class="meta-value">Open-source benchmark framework + web app</span></li>
+                <li><span class="meta-label">Code</span><span class="meta-value">Hosted on GitLab (MSOE)</span></li>
+              </ul>
+            </div>
+          </aside>
+
+          <article class="project-body">
+            <h2>Problem</h2>
+            <p>
+              Legal AI vendors make bold accuracy claims, but the industry lacks
+              shared, rigorous yardsticks for
+              <em>agentic</em> contract work. A general-purpose LLM benchmark
+              (multiple-choice exams, code puzzles) tells you almost nothing
+              about whether an agent can reliably find an assignment clause,
+              flag a non-standard indemnity, or reconcile definitions across a
+              contract suite. Obviate AI needed a way to evaluate and compare
+              agents on exactly those tasks — and to back their own product
+              claims with evidence.
+            </p>
+
+            <h2>Approach</h2>
+            <ul>
+              <li>
+                <strong>Task taxonomy:</strong> decomposed contract analysis into
+                benchmarkable task families (extraction, classification,
+                cross-document reasoning, clause comparison) with ground-truth
+                annotations and per-task scoring rubrics.
+              </li>
+              <li>
+                <strong>Agent harness:</strong> a framework that runs any
+                configured agent — prompt-only LLM, RAG pipeline, or tool-using
+                agent — against the task suite, capturing full interaction
+                traces so failures are diagnosable, not just scorable.
+              </li>
+              <li>
+                <strong>Comparison web app:</strong> an open-source application
+                for executing benchmarks and comparing results across agents and
+                model versions — leaderboard-style summaries plus drill-down
+                into individual transcripts and error categories.
+              </li>
+              <li>
+                <strong>Statistics:</strong> variance-aware scoring across
+                repeated runs, because agent non-determinism is the enemy of a
+                credible benchmark.
+              </li>
+            </ul>
+
+            <h2>Outcome</h2>
+            <p>
+              Delivered a working benchmark framework and web application to
+              Obviate AI as open source, giving the company a reproducible
+              evaluation loop for its product agents. Personally, this project
+              sits at the center of what I now do professionally: designing
+              agent evaluation systems where the hard part isn't running the
+              model — it's defining what "correct" means and trusting your
+              measurement enough to iterate on it.
+            </p>
+
+            <h2>Why it mattered for my career</h2>
+            <p>
+              Benchmarking agents in a regulated, high-stakes domain (law) maps
+              almost one-to-one onto benchmarking agents in another
+              (tax — my work at Juno): document-heavy inputs, expert-defined
+              ground truth, and error costs that are wildly asymmetric. The
+              framework design choices I made here directly informed how I
+              think about verification in production agent systems today.
+            </p>
+
+            <div class="project-nav">
+              <a class="btn" href="lab-materials-predictor.html"><i class="fas fa-arrow-left"></i> Prev: Lab Materials Predictor</a>
+              <a class="btn btn-primary" href="tax-review-agent.html">Next: Tax Review Agent <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <footer style="background-color: var(--terminal-bg-secondary); padding: 2rem 0; text-align: center; border-top: 1px solid var(--terminal-border)">
+      <div class="container">
+        <p style="margin: 0; color: var(--terminal-text-dim); font-size: var(--font-size-small)">© 2026 Travis Jankowski</p>
+      </div>
+    </footer>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
