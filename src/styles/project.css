@@ -231,6 +231,21 @@
   color: var(--terminal-green);
 }
 
+/* Keep button colors intact inside .project-body (its `a` rule
+   otherwise out-specifies .btn-primary and makes text green-on-green) */
+.project-nav a.btn {
+  color: var(--terminal-green);
+}
+
+.project-nav a.btn-primary {
+  color: var(--terminal-bg);
+}
+
+.project-nav a.btn:hover,
+.project-nav a.btn-primary:hover {
+  color: var(--terminal-bg);
+}
+
 /* Navigation footer on project pages */
 .project-nav {
   display: flex;
